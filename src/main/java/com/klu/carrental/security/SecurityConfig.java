@@ -81,8 +81,12 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration c = new CorsConfiguration();
-        // For development: allow all. In prod, set your exact origin(s), e.g. http://localhost:3000
-        c.setAllowedOriginPatterns(List.of("*"));
+        // Specific origins for development and production
+        c.setAllowedOrigins(List.of(
+            "http://localhost:5173",  // Vite dev
+            "http://localhost:8080",  // Tomcat
+            "http://localhost:9090"   // Alt Tomcat port
+        ));
         c.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         c.setAllowedHeaders(List.of("*"));
         c.setAllowCredentials(true);
